@@ -1,0 +1,45 @@
+#!/bin/bash
+
+mkdir ~/$1
+cd ~/$1
+virtualenv flask > /dev/null
+cd flask/bin
+
+./pip install flask-login > /dev/null
+./pip install flask-openid > /dev/null
+./pip install flask-mail > /dev/null
+./pip install flask-sqlalchemy > /dev/null
+./pip install sqlalchemy-migrate > /dev/null
+./pip install flask-whooshalchemy > /dev/null
+./pip install flask-wtf > /dev/null
+./pip install flask-babel > /dev/null
+./pip install guess_language > /dev/null
+./pip install flipflop > /dev/null
+./pip install coverage > /dev/null
+
+cd ../..
+
+mkdir ~/$1/app
+mkdir ~/$1/templates
+
+touch run.py
+chmod u+x run.py
+echo "#!flask/bin/python" >> run.py
+echo from app import app >> run.py
+echo "app.run(debug=True)" >> run.py
+
+cd ~/$1/app
+
+touch __init__.py
+echo from flask import Flask >> __init__.py
+echo app = "Flask(__name__)" >> __init__.py
+echo from app import views >> __init__.py
+
+
+touch views.py 
+echo from app import app >> views.py
+echo
+echo "@app.route('/')"  >> views.py
+echo "@app.route('/index')"  >> views.py
+echo "def index():" >> views.py
+echo "  return 'Hello, World!'" >> views.py
