@@ -1,9 +1,5 @@
 #!/bin/bash
 
-ps uax | grep $1 | grep -v root | cut -c10-14 > tmp 
-
-for pid in `cat tmp`; do
+for pid in `ps uax | grep $1 | grep -v root | cut -c10-14 | cat`; do
   kill -9 $pid
 done
-
-rm -f tmp
