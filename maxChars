@@ -1,2 +1,0 @@
-#!/bin/bash
-python ~/CSE11/pa3/CharCount.py $1

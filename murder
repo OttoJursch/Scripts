@@ -1,5 +1,4 @@
 #!/bin/bash
-
 for pid in `ps uax | grep $1 | grep -v root | cut -c10-14 | cat`; do
   kill -9 $pid
 done
